@@ -1,9 +1,25 @@
 package biblioteca;
 
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
+
     public static void main(String[] args) {
-        BookLibrary library = new BookLibrary(System.out);
-        library.start();
+        PrintStream stream = System.out;
+        List<Book> books = createBookList(stream);
+        BookLibrary library = new BookLibrary(books);
+        Application app = new Application(stream, library);
+
+        app.start();
+    }
+
+    private static List<Book> createBookList(PrintStream stream) {
+        List<Book> books = new ArrayList<>();
+        books.add(new Book(stream, "Harry Potter", "JK Rowling", "2004"));
+        books.add(new Book(stream, "Tale of Two Cities", "Charles Dickens", "1859"));
+        return books;
     }
 
 }
