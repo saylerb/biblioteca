@@ -22,8 +22,8 @@ public class ApplicationTest {
     public void setUp() throws Exception {
         stream = mock(PrintStream.class);
         library = mock(BookLibrary.class);
-        app = new Application(stream, library);
         reader = mock(BufferedReader.class);
+        app = new Application(stream, library, reader);
     }
 
     @Test
@@ -43,11 +43,20 @@ public class ApplicationTest {
 
     @Test
     public void shouldTellLibraryToListAllBooksOnCustomerInput() throws IOException {
-        app.start();
-
         when(reader.readLine()).thenReturn("a");
 
+        app.getCustomerInput();
+
         verify(library).printAllBooks();
+    }
+
+    @Test
+    public void shouldGiveCustomerAnErrorMessageWhenInvalidInputIsEntered() throws IOException {
+        when(reader.readLine()).thenReturn("l");
+
+        app.getCustomerInput();
+
+        verify(stream).println("Select a valid option!");
     }
 
 }

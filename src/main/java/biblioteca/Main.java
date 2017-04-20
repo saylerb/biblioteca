@@ -1,5 +1,7 @@
 package biblioteca;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +12,11 @@ public class Main {
         PrintStream stream = System.out;
         List<Book> books = createBookList(stream);
         BookLibrary library = new BookLibrary(books);
-        Application app = new Application(stream, library);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Application app = new Application(stream, library, reader );
 
         app.start();
+        app.getCustomerInput();
     }
 
     private static List<Book> createBookList(PrintStream stream) {
