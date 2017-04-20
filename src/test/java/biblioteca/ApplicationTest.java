@@ -5,14 +5,17 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class ApplicationTest {
     private PrintStream stream;
     private BookLibrary library;
+    private BufferedReader reader;
     private Application app;
 
     @Before
@@ -20,6 +23,7 @@ public class ApplicationTest {
         stream = mock(PrintStream.class);
         library = mock(BookLibrary.class);
         app = new Application(stream, library);
+        reader = mock(BufferedReader.class);
     }
 
     @Test
@@ -27,13 +31,6 @@ public class ApplicationTest {
         app.start();
 
         verify(stream).println("Welcome to the Biblioteca!");
-    }
-
-    @Test @Ignore
-    public void shouldTellLibraryToListAllBooksOnStart() {
-        app.start();
-
-        verify(library).printAllBooks();
     }
 
     @Test
@@ -44,5 +41,13 @@ public class ApplicationTest {
         verify(stream).println("1. Enter 'a' for a list of all books");
     }
 
+    @Test
+    public void shouldTellLibraryToListAllBooksOnCustomerInput() throws IOException {
+        app.start();
+
+        when(reader.readLine()).thenReturn("a");
+
+        verify(library).printAllBooks();
+    }
 
 }
