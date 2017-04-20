@@ -3,6 +3,8 @@ package biblioteca;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.Before;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 
 import java.io.PrintStream;
@@ -33,9 +35,18 @@ public class BookLibraryTest {
     @Test
     public void shouldPrintListOfBooksIfNonEmptyLibrary() {
         library.start();
-        verify(stream).println("Welcome to the Biblioteca!");
-        verify(stream).println("Harry Potter");
-        verify(stream).println("Tale of Two Cities");
+
+        verify(stream).println(Mockito.contains("Harry Potter"));
+        verify(stream).println(Mockito.contains("Tale of Two Cities"));
     }
+
+    @Test
+    public void shouldPrintListOfBooksWithAuthorAndYearPublished() {
+        library.start();
+
+        verify(stream).println("Harry Potter--JK Rowling--2004");
+        verify(stream).println("Tale of Two Cities--Charles Dickens--1859");
+    }
+
 
 }

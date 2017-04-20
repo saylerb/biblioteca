@@ -18,8 +18,8 @@ public class BookLibrary {
 
     private List<String> createBookList() {
         books = new ArrayList<>();
-        books.add("Harry Potter");
-        books.add("Tale of Two Cities");
+        books.add("Harry Potter--JK Rowling--2004");
+        books.add("Tale of Two Cities--Charles Dickens--1859");
         return books;
     }
 
