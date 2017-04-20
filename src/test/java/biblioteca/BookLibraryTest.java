@@ -21,10 +21,7 @@ public class BookLibraryTest {
     @Before
     public void setUp() {
         stream = mock(PrintStream.class);
-        books = new ArrayList<String>();
-        books.add("Harry Potter");
-        books.add("Lord of the Rings");
-        library = new BookLibrary(stream, books);
+        library = new BookLibrary(stream);
     }
 
     @Test
@@ -33,20 +30,12 @@ public class BookLibraryTest {
         verify(stream).println("Welcome to the Biblioteca!");
     }
 
-    @Test @Ignore
-    public void shouldPrintNothingWhenNoBooksInLibrary() {
-        BookLibrary emptyLibrary = new BookLibrary(stream, new ArrayList<>());
-        emptyLibrary.start();
-        verify(stream).println("Welcome to the Biblioteca!");
-        verify(stream).println("");
-    }
-
     @Test
     public void shouldPrintListOfBooksIfNonEmptyLibrary() {
         library.start();
         verify(stream).println("Welcome to the Biblioteca!");
         verify(stream).println("Harry Potter");
-        verify(stream).println("Lord of the Rings");
+        verify(stream).println("Tale of Two Cities");
     }
 
 }
