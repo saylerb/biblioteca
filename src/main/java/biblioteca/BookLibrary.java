@@ -9,25 +9,25 @@ import java.util.List;
 public class BookLibrary {
 
     private PrintStream stream;
-    private List<String> books;
+    private List<Book> books;
 
     public BookLibrary(PrintStream stream) {
         this.stream = stream;
         this.books = createBookList();
     }
 
-    private List<String> createBookList() {
+    private List<Book> createBookList() {
         books = new ArrayList<>();
-        books.add("Harry Potter--JK Rowling--2004");
-        books.add("Tale of Two Cities--Charles Dickens--1859");
+        books.add(new Book("Harry Potter", "JK Rowling", "2004"));
+        books.add(new Book("Tale of Two Cities", "Charles Dickens", "1859"));
         return books;
     }
 
 
     public void start() {
         stream.println("Welcome to the Biblioteca!");
-        for(String book : books) {
-            stream.println(book);
+        for(Book book : books) {
+            stream.println(book.getBookDetails());
         }
     }
 }
