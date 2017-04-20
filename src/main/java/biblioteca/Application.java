@@ -14,6 +14,8 @@ public class Application {
 
     public void start() {
         stream.println("Welcome to the Biblioteca!");
-        library.printAllBooks();
+        stream.println("Menu");
+        stream.println("1. Enter 'a' for a list of all books");
+//        library.printAllBooks();
     }
 }
