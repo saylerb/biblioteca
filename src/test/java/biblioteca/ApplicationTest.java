@@ -11,6 +11,7 @@ import java.io.PrintStream;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 public class ApplicationTest {
     private PrintStream stream;
@@ -43,7 +44,7 @@ public class ApplicationTest {
 
     @Test
     public void shouldTellLibraryToListAllBooksOnCustomerInput() throws IOException {
-        when(reader.readLine()).thenReturn("a");
+        when(reader.readLine()).thenReturn("a", "q");
 
         app.getCustomerInput();
 
@@ -52,11 +53,20 @@ public class ApplicationTest {
 
     @Test
     public void shouldGiveCustomerAnErrorMessageWhenInvalidInputIsEntered() throws IOException {
-        when(reader.readLine()).thenReturn("l");
+        when(reader.readLine()).thenReturn("l", "q");
 
         app.getCustomerInput();
 
         verify(stream).println("Select a valid option!");
+    }
+
+    @Test
+    public void shouldAllowCustomerToChooseMultipleMenuOptions() throws IOException {
+        when(reader.readLine()).thenReturn("a", "a", "q");
+
+        app.getCustomerInput();
+
+        verify(library, times(2)).printAllBooks();
     }
 
 }

@@ -23,20 +23,24 @@ public class Application {
     }
 
     public void getCustomerInput() {
-        try {
-            String menuOption = reader.readLine();
-            parseCustomerInput(menuOption);
-        } catch (IOException e) {
-            e.printStackTrace();
+        String customerInput = "";
+        while (!customerInput.equals("q")) {
+            try {
+                customerInput = reader.readLine();
+                parseCustomerInput(customerInput);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    private void parseCustomerInput(String menuOption) {
-        if (menuOption.equals("a")) {
+    private void parseCustomerInput(String customerInput) {
+        if (customerInput.equals("a")) {
             library.printAllBooks();
+        } else if (customerInput.equals("q")) {
+            stream.println("Quitting Application");
         } else {
             stream.println("Select a valid option!");
         }
     }
-
 }
