@@ -1,16 +1,13 @@
 package biblioteca;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 public class ApplicationTest {
@@ -28,25 +25,28 @@ public class ApplicationTest {
     }
 
     @Test
-    public void shouldDisplayAWelcomeMessageOnStart() {
+    public void shouldDisplayAWelcomeMessageOnStart() throws IOException {
+        when(reader.readLine()).thenReturn("q");
         app.start();
 
         verify(stream).println("Welcome to the Biblioteca!");
     }
 
     @Test
-    public void shouldDisplayListOfMenuOptions() {
+    public void shouldDisplayListOfMenuOptions() throws IOException {
+        when(reader.readLine()).thenReturn("q");
         app.start();
 
-        verify(stream).println("Menu");
-        verify(stream).println("1. Enter 'a' for a list of all books");
+        verify(stream).println("Select a menu option: ");
+        verify(stream).println("a - List all books");
+        verify(stream).println("q - quit");
     }
 
     @Test
     public void shouldTellLibraryToListAllBooksOnCustomerInput() throws IOException {
         when(reader.readLine()).thenReturn("a", "q");
 
-        app.getCustomerInput();
+        app.start();
 
         verify(library).printAllBooks();
     }
@@ -55,7 +55,7 @@ public class ApplicationTest {
     public void shouldGiveCustomerAnErrorMessageWhenInvalidInputIsEntered() throws IOException {
         when(reader.readLine()).thenReturn("l", "q");
 
-        app.getCustomerInput();
+        app.start();
 
         verify(stream).println("Select a valid option!");
     }
@@ -64,7 +64,7 @@ public class ApplicationTest {
     public void shouldAllowCustomerToChooseMultipleMenuOptions() throws IOException {
         when(reader.readLine()).thenReturn("a", "a", "q");
 
-        app.getCustomerInput();
+        app.start();
 
         verify(library, times(2)).printAllBooks();
     }

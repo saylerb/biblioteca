@@ -18,27 +18,35 @@ public class Application {
 
     public void start() {
         stream.println("Welcome to the Biblioteca!");
-        stream.println("Menu");
-        stream.println("1. Enter 'a' for a list of all books");
+        stream.println("Select a menu option: ");
+        stream.println("a - List all books");
+        stream.println("q - quit");
+
+        String customerInput = "";
+
+        while (!customerInput.equals("q")) {
+            customerInput = getCustomerInput();
+            parseCustomerInput(customerInput);
+        }
+
+        stream.println("Quitting Application");
     }
 
-    public void getCustomerInput() {
+    private String getCustomerInput() {
         String customerInput = "";
-        while (!customerInput.equals("q")) {
-            try {
-                customerInput = reader.readLine();
-                parseCustomerInput(customerInput);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            customerInput = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return customerInput;
     }
 
     private void parseCustomerInput(String customerInput) {
         if (customerInput.equals("a")) {
             library.printAllBooks();
         } else if (customerInput.equals("q")) {
-            stream.println("Quitting Application");
+            return;
         } else {
             stream.println("Select a valid option!");
         }

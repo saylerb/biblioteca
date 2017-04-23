@@ -16,7 +16,6 @@ public class Main {
         Application app = new Application(stream, library, reader );
 
         app.start();
-        app.getCustomerInput();
     }
 
     private static List<Book> createBookList(PrintStream stream) {
