@@ -16,6 +16,10 @@ public class Book {
     }
 
     public void printBookDetails() {
-        stream.println(title + "--" + author + "--" + yearPublished);
+        stream.println(getInfo());
+    }
+
+    public String getInfo() {
+        return title + "--" + author + "--" + yearPublished;
     }
 }

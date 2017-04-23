@@ -16,7 +16,17 @@ public class BookLibrary {
         }
     }
 
-    public void checkoutBook() {
-        books.remove(0);
+    public void checkoutBook(String bookTitle) {
+        int bookIndex = getBookIndex(bookTitle);
+        books.remove(bookIndex);
+    }
+
+    public int getBookIndex(String bookTitle) {
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i).getInfo().contains(bookTitle)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

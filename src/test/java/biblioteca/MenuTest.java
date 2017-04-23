@@ -46,6 +46,13 @@ public class MenuTest {
     public void shouldTellLibraryToCheckoutBookWhenOptionCIsSelected() throws IOException {
         menu.parseCustomerInput("c");
 
-        verify(library).checkoutBook();
+        verify(library).checkoutBook("Harry Potter");
+    }
+
+    @Test
+    public void shouldPromptCustomerToEnterBookTitleWhenCheckingOut() throws IOException {
+        menu.parseCustomerInput("c");
+
+        verify(stream).println("Enter a title: ");
     }
 }

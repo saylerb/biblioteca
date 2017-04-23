@@ -17,7 +17,7 @@ public class Menu {
     }
 
 
-    String readLine() {
+    public String readLine() {
         String customerInput = "";
         try {
             customerInput = reader.readLine();
@@ -27,13 +27,15 @@ public class Menu {
         return customerInput;
     }
 
-    void parseCustomerInput(String customerInput) {
+    public void parseCustomerInput(String customerInput) {
         if (customerInput.equals("a")) {
             library.printAllBooks();
         } else if (customerInput.equals("q")) {
             return;
         } else if (customerInput.equals("c")) {
-            library.checkoutBook();
+            stream.println("Enter a title: ");
+            String bookToRemove = readLine();
+            library.checkoutBook(bookToRemove);
         } else {
             stream.println("Select a valid option!");
         }
