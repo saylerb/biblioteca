@@ -15,4 +15,8 @@ public class BookLibrary {
             book.printBookDetails();
         }
     }
+
+    public void checkoutBook() {
+        books.remove(0);
+    }
 }

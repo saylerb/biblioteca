@@ -13,7 +13,8 @@ public class Main {
         List<Book> books = createBookList(stream);
         BookLibrary library = new BookLibrary(books);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        Application app = new Application(stream, library, reader );
+        Menu menu = new Menu(reader, stream, library);
+        Application app = new Application(stream, menu);
 
         app.start();
     }
