@@ -1,9 +1,10 @@
 package biblioteca;
 
+import java.util.Collection;
 import java.util.List;
 
 public class BookLibrary {
-    private List<Book> books;
+    private Collection<Book> books;
 
     public BookLibrary(List<Book> books) {
         this.books = books;
@@ -17,16 +18,26 @@ public class BookLibrary {
     }
 
     public void checkoutBook(String bookTitle) {
-        int bookIndex = getBookIndex(bookTitle);
-        books.remove(bookIndex);
+        Book book = findBook(bookTitle);
+
+        if (book != null) {
+            books.remove(book);
+        }
     }
 
-    public int getBookIndex(String bookTitle) {
-        for (int i = 0; i < books.size(); i++) {
-            if (books.get(i).getInfo().contains(bookTitle)) {
-                return i;
+    public Book findBook(String bookTitle) {
+        for (Book book : books) {
+            if (book.hasTitle(bookTitle)) {
+                return book;
             }
         }
-        return -1;
+        return null;
+
+//        for (int i = 0; i < books.size(); i++) {
+//            if (books.get(i).getInfo().contains(bookTitle)) {
+//                return i;
+//            }
+//        }
+//        return -1;
     }
 }

@@ -36,6 +36,8 @@ public class Menu {
             stream.println("Enter a title: ");
             String bookToRemove = readLine();
             library.checkoutBook(bookToRemove);
+
+            stream.println("Thank You! Enjoy the book.");
         } else {
             stream.println("Select a valid option!");
         }

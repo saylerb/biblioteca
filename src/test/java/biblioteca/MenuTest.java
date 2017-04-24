@@ -1,6 +1,7 @@
 package biblioteca;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -9,6 +10,7 @@ import java.io.PrintStream;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class MenuTest {
 
@@ -44,6 +46,8 @@ public class MenuTest {
 
     @Test
     public void shouldTellLibraryToCheckoutBookWhenOptionCIsSelected() throws IOException {
+        when(reader.readLine()).thenReturn("Harry Potter");
+
         menu.parseCustomerInput("c");
 
         verify(library).checkoutBook("Harry Potter");
@@ -54,5 +58,11 @@ public class MenuTest {
         menu.parseCustomerInput("c");
 
         verify(stream).println("Enter a title: ");
+        verify(stream).println("Thank You! Enjoy the book.");
+    }
+
+    @Test @Ignore
+    public void shouldTellUserBookIsNotAvailableWhenNotInLibrary() {
+        menu.parseCustomerInput("c");
     }
 }

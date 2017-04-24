@@ -22,4 +22,8 @@ public class Book {
     public String getInfo() {
         return title + "--" + author + "--" + yearPublished;
     }
+
+    public boolean hasTitle(String bookTitle) {
+        return title.equals(bookTitle);
+    }
 }

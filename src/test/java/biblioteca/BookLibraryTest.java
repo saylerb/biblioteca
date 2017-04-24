@@ -56,7 +56,7 @@ public class BookLibraryTest {
         assertThat(books.size(), is(1));
     }
 
-    @Test
+    @Test @Ignore
     public void shouldBeAbleToDetermineIndexOfFirstBookWhenGivenATitle() {
         when(books.get(0).getInfo()).thenReturn("Harry Potter");
         when(books.get(1).getInfo()).thenReturn("A Tale");
